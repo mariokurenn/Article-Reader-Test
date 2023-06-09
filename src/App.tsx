@@ -144,7 +144,7 @@ const App = () => {
                     <h3>{article.title}</h3>
                     <p>{article.publishedAt.toString()}</p>
                     <button onClick={() => handleRemove(article)}>
-                      Test
+                      Remove
                     </button>
                   </li>
                 ))}

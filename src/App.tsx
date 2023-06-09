@@ -59,7 +59,6 @@ const App = () => {
           title: doc.headline.main,
           category: doc.section_name,
           publishedAt: new Date(doc.pub_date),
-
         }));
 
         // Sorting articles in descending order (most recent first)
@@ -86,21 +85,6 @@ const App = () => {
   const handleRemove = (article: Article) => {
     dispatch(removeArticle(article));
   };
-
-  const filteredArticles = articles.filter((article) =>
-    article.title.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-
-  const articlesByCategory = filteredArticles.reduce<{
-    [key: string]: Article[];
-  }>((groups, article) => {
-    const category = article.category;
-    if (!groups[category]) {
-      groups[category] = [];
-    }
-    groups[category].push(article);
-    return groups;
-  }, {});
 
   const debouncedSearch = useCallback(
     _.debounce((query) => {
@@ -165,31 +149,9 @@ const App = () => {
                   </li>
                 ))}
               </ul>
-              {Object.entries(articlesByCategory).map(
-                ([category, articles], index) => (
-                  <div key={index}>
-                    <h2>
-                      <Link to={`/${category}`}>{category}</Link>
-                    </h2>
-                    <ul>
-                      {articles.map((article, index) => (
-                        <li key={index}>
-                          <h3>{article.title}</h3>
-                          <p>{article.publishedAt.toString()}</p>
-                          <ArticleActions article={article} />
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )
-              )}
               <LatestNews allArticles={displayedArticles} />
             </div>
           }
-        />
-        <Route
-          path="/:category"
-          element={<Category articlesByCategory={articlesByCategory} />}
         />
       </Routes>
     </div>

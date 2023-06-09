@@ -1,0 +1,30 @@
+.parent {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-gap: 10px;
+  }
+  
+  
+  .item {
+    background-color: #ccc;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  /* Media upit za responsive dizajn */
+  @media (max-width: 600px) {
+    .parent {
+      grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+    }
+  }
+  
+  
+//   .div5 {
+//     grid-area: 3 / 1 / 5 / 4;
+//   }
+  .parent > div {
+    min-width: 320px;
+    max-width: 320px;
+    width: 100%;
+    margin: 10px;
+  }
